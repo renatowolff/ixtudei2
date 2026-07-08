@@ -12,11 +12,15 @@
       html, body {
         margin: 0;
         padding: 0;
-        background: #faf9f5;
+        background: #14140f;
         font-family: "Inter", system-ui, -apple-system, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
+      }
+      /* Inputs e botões não herdam fonte por padrão — forçar Inter em tudo */
+      input, button, textarea, select {
+        font-family: inherit;
       }
     </style>
   </head>

@@ -124,21 +124,21 @@ export default function App() {
   const pct = totals.slots ? Math.round((totals.done / totals.slots) * 100) : 0;
 
   return (
-    <div style={{ maxWidth: 620, margin: "0 auto", padding: "24px 20px", fontFamily: font, color: "#1a1a19", background: "#faf9f5", minHeight: "100vh" }}>
+    <div style={{ maxWidth: 620, margin: "0 auto", padding: "24px 20px", fontFamily: font, color: "#ececff", background: "#14140f", minHeight: "100vh" }}>
       <div style={{ marginBottom: 18 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
           <h1 style={{ fontSize: 20, fontWeight: 600, margin: "0 0 4px", letterSpacing: "-0.02em" }}>PCPR 2026 — Cronograma diário</h1>
           <SyncBadge sync={sync} />
         </div>
-        <p style={{ fontSize: 13, color: "#6b6a63", margin: 0 }}>4h/dia · 7 dias/semana · 1h por tópico · prova em 11/10/2026</p>
+        <p style={{ fontSize: 13, color: "#9d9c92", margin: 0 }}>4h/dia · 7 dias/semana · 1h por tópico · prova em 11/10/2026</p>
       </div>
 
-      <div style={{ display: "flex", gap: 4, marginBottom: 18, borderBottom: "1px solid #e5e3da" }}>
+      <div style={{ display: "flex", gap: 4, marginBottom: 18, borderBottom: "1px solid #2e2e26" }}>
         {[["dia", "Dia a dia"], ["edital", "Edital completo"]].map(([k, label]) => (
           <button key={k} onClick={() => setAba(k)}
             style={{ padding: "9px 16px", fontSize: 14, background: "none", border: "none", cursor: "pointer",
-              color: aba === k ? "#1a1a19" : "#6b6a63", fontWeight: aba === k ? 600 : 400,
-              borderBottom: aba === k ? "2px solid #1a1a19" : "2px solid transparent", marginBottom: -1 }}>
+              color: aba === k ? "#ececff" : "#9d9c92", fontWeight: aba === k ? 600 : 400,
+              borderBottom: aba === k ? "2px solid #ececff" : "2px solid transparent", marginBottom: -1 }}>
             {label}
           </button>
         ))}
@@ -155,7 +155,7 @@ export default function App() {
         <button onClick={() => setIdx((i) => Math.max(0, i - 1))} disabled={idx === 0}
           style={navBtn(idx === 0)}><ChevronLeft size={18} /></button>
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 12, color: "#6b6a63", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+          <div style={{ fontSize: 12, color: "#9d9c92", textTransform: "uppercase", letterSpacing: "0.04em" }}>
             Dia {dia.n} de {CAL.dias.length}{isToday && " · hoje"}
           </div>
           <div style={{ fontSize: 16, fontWeight: 600, textTransform: "capitalize", marginTop: 2 }}>{fmtData(dia.data)}</div>
@@ -164,18 +164,18 @@ export default function App() {
           style={navBtn(idx === CAL.dias.length - 1)}><ChevronRight size={18} /></button>
       </div>
 
-      {isToday && <div style={{ height: 3, background: "#1a1a19", borderRadius: 2, marginBottom: 14 }} />}
+      {isToday && <div style={{ height: 3, background: "#ececff", borderRadius: 2, marginBottom: 14 }} />}
 
       {dia.fase === "conteudo" ? (
         <div>
           {dia.slots.map((s, si) => {
             const key = idx + "_" + si;
             const done = !!state.done[key];
-            const cor = CAL.cores[s[0]] || "#888";
+            const cor = CAL.cores[s[0]] || "#9d9c92";
             const big = CAL.grandes.includes(s[0]);
             return (
               <label key={si} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "14px 15px", marginBottom: 8,
-                background: "#fff", border: "1px solid " + (done ? "#e8e6dc" : "#eceadf"), borderRadius: 12, cursor: "pointer",
+                background: "#1f1f18", border: "1px solid " + (done ? "#33322a" : "#2e2e26"), borderRadius: 12, cursor: "pointer",
                 opacity: done ? 0.6 : 1 }}>
                 <input type="checkbox" checked={done} onChange={() => toggle(key)}
                   style={{ width: 19, height: 19, marginTop: 1, flexShrink: 0, cursor: "pointer", accentColor: cor }} />
@@ -183,15 +183,15 @@ export default function App() {
                   <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 3 }}>
                     <span style={{ width: 9, height: 9, borderRadius: 3, background: cor, flexShrink: 0 }} />
                     <span style={{ fontSize: 12, fontWeight: 600, color: cor }}>{s[0]}</span>
-                    {big && <span style={{ fontSize: 10, color: "#b4b2a9", border: "1px solid #e8e6dc", borderRadius: 10, padding: "1px 6px" }}>foco</span>}
-                    <span style={{ marginLeft: "auto", fontSize: 11, color: "#b4b2a9", display: "flex", alignItems: "center", gap: 3 }}><Clock size={11} />1h</span>
+                    {big && <span style={{ fontSize: 10, color: "#6f6e66", border: "1px solid #33322a", borderRadius: 10, padding: "1px 6px" }}>foco</span>}
+                    <span style={{ marginLeft: "auto", fontSize: 11, color: "#6f6e66", display: "flex", alignItems: "center", gap: 3 }}><Clock size={11} />1h</span>
                   </div>
-                  <div style={{ fontSize: 14, color: done ? "#b4b2a9" : "#1a1a19", textDecoration: done ? "line-through" : "none" }}>{s[1]}</div>
+                  <div style={{ fontSize: 14, color: done ? "#6f6e66" : "#ececff", textDecoration: done ? "line-through" : "none" }}>{s[1]}</div>
                   {SUB[s[1]] && (
                     <ul style={{ margin: "7px 0 0", padding: 0, listStyle: "none", display: "flex", flexWrap: "wrap", gap: "4px 10px" }}>
                       {SUB[s[1]].map((sub, k) => (
                         <li key={k} style={{ fontSize: 11.5, color: "#8a897f", display: "flex", alignItems: "center", gap: 4 }}>
-                          <span style={{ width: 3, height: 3, borderRadius: "50%", background: "#c9c7bc", flexShrink: 0 }} />{sub}
+                          <span style={{ width: 3, height: 3, borderRadius: "50%", background: "#55544c", flexShrink: 0 }} />{sub}
                         </li>
                       ))}
                     </ul>
@@ -202,7 +202,7 @@ export default function App() {
           })}
         </div>
       ) : (
-        <div style={{ background: "#fff", border: "1px solid #eceadf", borderRadius: 12, padding: "20px 18px", textAlign: "center" }}>
+        <div style={{ background: "#1f1f18", border: "1px solid #2e2e26", borderRadius: 12, padding: "20px 18px", textAlign: "center" }}>
           <CircleDot size={20} style={{ color: "#c98500", marginBottom: 8 }} />
           <div style={{ fontSize: 12, fontWeight: 600, color: "#c98500", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 6 }}>Fase de revisão</div>
           <div style={{ fontSize: 15, lineHeight: 1.5 }}>{dia.foco}</div>
@@ -211,11 +211,11 @@ export default function App() {
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 18 }}>
         <button onClick={() => { const i = CAL.dias.findIndex((d) => d.data === TODAY_ISO); if (i >= 0) setIdx(i); }}
-          style={{ fontSize: 13, color: "#1a1a19", background: "#fff", border: "1px solid #ddd", borderRadius: 8, padding: "7px 13px", cursor: "pointer", fontWeight: 500 }}>
+          style={{ fontSize: 13, color: "#ececff", background: "#1f1f18", border: "1px solid #3a3a31", borderRadius: 8, padding: "7px 13px", cursor: "pointer", fontWeight: 500 }}>
           Ir para hoje
         </button>
         <button onClick={reset}
-          style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: "#6b6a63", background: "none", border: "1px solid #ddd", borderRadius: 8, padding: "7px 12px", cursor: "pointer" }}>
+          style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: "#9d9c92", background: "none", border: "1px solid #3a3a31", borderRadius: 8, padding: "7px 12px", cursor: "pointer" }}>
           <RotateCcw size={13} /> Zerar progresso
         </button>
       </div>
@@ -223,7 +223,7 @@ export default function App() {
 
       {aba === "edital" && (
         <div>
-          <p style={{ fontSize: 13, color: "#6b6a63", margin: "0 0 16px" }}>
+          <p style={{ fontSize: 13, color: "#9d9c92", margin: "0 0 16px" }}>
             Todos os itens do Anexo I com seus subtemas, disciplina por disciplina. Marque cada subtema conforme cobrir — serve para conferir cobertura total antes da prova, independente do cronograma diário.
           </p>
           {CHK.map((d, di) => {
@@ -239,18 +239,18 @@ export default function App() {
             const open = abertos[di];
             const pctD = totalD ? Math.round((feitos / totalD) * 100) : 0;
             return (
-              <div key={di} style={{ background: "#fff", border: "1px solid #eceadf", borderRadius: 12, padding: "12px 14px", marginBottom: 8 }}>
+              <div key={di} style={{ background: "#1f1f18", border: "1px solid #2e2e26", borderRadius: 12, padding: "12px 14px", marginBottom: 8 }}>
                 <div onClick={() => setAbertos((e) => ({ ...e, [di]: !e[di] }))}
                   style={{ display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer" }}>
                   <span style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, fontWeight: 500 }}>
                     {open ? <ChevronDown size={16} /> : <ChevronRightIcon size={16} />}
                     <span style={{ width: 10, height: 10, borderRadius: 3, background: cor, flexShrink: 0 }} />{nome}
                   </span>
-                  <span style={{ fontSize: 13, color: feitos === totalD ? cor : "#6b6a63", flexShrink: 0, marginLeft: 10, fontWeight: feitos === totalD ? 600 : 400 }}>
+                  <span style={{ fontSize: 13, color: feitos === totalD ? cor : "#9d9c92", flexShrink: 0, marginLeft: 10, fontWeight: feitos === totalD ? 600 : 400 }}>
                     {feitos}/{totalD}
                   </span>
                 </div>
-                <div style={{ height: 5, borderRadius: 4, background: "#f0eee6", marginTop: 8, overflow: "hidden" }}>
+                <div style={{ height: 5, borderRadius: 4, background: "#26261f", marginTop: 8, overflow: "hidden" }}>
                   <div style={{ height: "100%", width: pctD + "%", background: cor, borderRadius: 4, transition: "width .3s" }} />
                 </div>
                 {open && (
@@ -259,11 +259,11 @@ export default function App() {
                       const itemKey = di + "_" + ii;
                       const itemFeito = !!(state.edital || {})[itemKey];
                       return (
-                        <div key={ii} style={{ borderTop: "1px solid #f0eee6", paddingTop: 8, marginTop: 8 }}>
+                        <div key={ii} style={{ borderTop: "1px solid #26261f", paddingTop: 8, marginTop: 8 }}>
                           <label style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13.5, cursor: "pointer" }}>
                             <input type="checkbox" checked={itemFeito} onChange={() => toggleEdital(itemKey)}
                               style={{ width: 16, height: 16, marginTop: 2, flexShrink: 0, cursor: "pointer", accentColor: cor }} />
-                            <span style={{ flex: 1, fontWeight: 500, color: itemFeito ? "#b4b2a9" : "#1a1a19", textDecoration: itemFeito ? "line-through" : "none" }}>
+                            <span style={{ flex: 1, fontWeight: 500, color: itemFeito ? "#6f6e66" : "#ececff", textDecoration: itemFeito ? "line-through" : "none" }}>
                               <span style={{ color: cor, fontWeight: 600, marginRight: 5 }}>{codigo}</span>{titulo}
                             </span>
                           </label>
@@ -276,7 +276,7 @@ export default function App() {
                                   <label key={si} style={{ display: "flex", alignItems: "flex-start", gap: 8, padding: "4px 0", fontSize: 12.5, cursor: "pointer" }}>
                                     <input type="checkbox" checked={subFeito} onChange={() => toggleEdital(subKey)}
                                       style={{ width: 14, height: 14, marginTop: 1, flexShrink: 0, cursor: "pointer", accentColor: cor }} />
-                                    <span style={{ flex: 1, color: subFeito ? "#c2c0b6" : "#6b6a63", textDecoration: subFeito ? "line-through" : "none" }}>{sub}</span>
+                                    <span style={{ flex: 1, color: subFeito ? "#55544c" : "#9d9c92", textDecoration: subFeito ? "line-through" : "none" }}>{sub}</span>
                                   </label>
                                 );
                               })}
@@ -290,7 +290,7 @@ export default function App() {
               </div>
             );
           })}
-          <p style={{ fontSize: 11, color: "#b4b2a9", marginTop: 16, lineHeight: 1.6, borderTop: "1px solid #eceadf", paddingTop: 12 }}>
+          <p style={{ fontSize: 11, color: "#6f6e66", marginTop: 16, lineHeight: 1.6, borderTop: "1px solid #2e2e26", paddingTop: 12 }}>
             Este checklist é independente do progresso diário: marcar aqui não afeta o cronograma e vice-versa. Marcar um item numerado e seus subtemas são ações separadas — a contagem soma ambos. Use-o como mapa de cobertura do edital.
           </p>
         </div>
@@ -301,11 +301,11 @@ export default function App() {
 
 function SyncBadge({ sync }) {
   const map = {
-    carregando: { icon: <Loader2 size={12} />, txt: "sincronizando", cor: "#6b6a63", bg: "#f0eee6" },
-    salvando:   { icon: <Loader2 size={12} />, txt: "salvando",      cor: "#854F0B", bg: "#FAEEDA" },
-    ok:         { icon: <Cloud size={12} />,   txt: "sincronizado",  cor: "#0C447C", bg: "#E6F1FB" },
-    erro:       { icon: <CloudOff size={12} />, txt: "sem conexão",   cor: "#A32D2D", bg: "#FCEBEB" },
-    offline:    { icon: <CloudOff size={12} />, txt: "só neste PC",   cor: "#6b6a63", bg: "#f0eee6" },
+    carregando: { icon: <Loader2 size={12} />, txt: "sincronizando", cor: "#9d9c92", bg: "#26261f" },
+    salvando:   { icon: <Loader2 size={12} />, txt: "salvando",      cor: "#EF9F27", bg: "#3a2f16" },
+    ok:         { icon: <Cloud size={12} />,   txt: "sincronizado",  cor: "#85B7EB", bg: "#16283a" },
+    erro:       { icon: <CloudOff size={12} />, txt: "sem conexão",   cor: "#F09595", bg: "#3a1c1c" },
+    offline:    { icon: <CloudOff size={12} />, txt: "só neste PC",   cor: "#9d9c92", bg: "#26261f" },
   };
   const s = map[sync] || map.ok;
   return (
@@ -318,8 +318,8 @@ function SyncBadge({ sync }) {
 
 function Stat({ icon, label, value }) {
   return (
-    <div style={{ flex: 1, background: "#fff", border: "1px solid #eceadf", borderRadius: 12, padding: "12px 14px" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, color: "#6b6a63", marginBottom: 5 }}>{icon}{label}</div>
+    <div style={{ flex: 1, background: "#1f1f18", border: "1px solid #2e2e26", borderRadius: 12, padding: "12px 14px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 12, color: "#9d9c92", marginBottom: 5 }}>{icon}{label}</div>
       <div style={{ fontSize: 21, fontWeight: 600, letterSpacing: "-0.02em" }}>{value}</div>
     </div>
   );
@@ -327,5 +327,5 @@ function Stat({ icon, label, value }) {
 
 function navBtn(disabled) {
   return { display: "flex", alignItems: "center", justifyContent: "center", width: 38, height: 38, borderRadius: 10,
-    background: "#fff", border: "1px solid #ddd", cursor: disabled ? "default" : "pointer", opacity: disabled ? 0.4 : 1, color: "#1a1a19" };
+    background: "#1f1f18", border: "1px solid #3a3a31", cursor: disabled ? "default" : "pointer", opacity: disabled ? 0.4 : 1, color: "#ececff" };
 }
